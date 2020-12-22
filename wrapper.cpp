@@ -6,6 +6,7 @@
 #include "imgui_draw.cpp"
 #include "imgui_demo.cpp"
 #include "imgui_widgets.cpp"
+#include "imgui_tables.cpp"
 #ifdef IMGUI_FREETYPE_ENABLED
 #include "misc/freetype/imgui_freetype.cpp"
 #endif
@@ -32,6 +33,8 @@
 #include "wrapper/Widgets.cpp"
 #include "wrapper/Window.cpp"
 #include "wrapper/WrapperConverter.cpp"
+#include "wrapper/Docking.cpp"
+#include "wrapper/Viewport.cpp"
 #ifdef IMGUI_FREETYPE_ENABLED
 #include "wrapper/FreeType.cpp"
 #endif

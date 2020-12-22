@@ -20,6 +20,12 @@ func PopID() {
 	C.iggPopID()
 }
 
+func GetID(id string) int {
+	idArg, idFin := wrapString(id)
+	defer idFin()
+	return int(C.iggGetID(idArg))
+}
+
 // Separator is generally horizontal. Inside a menu bar or in horizontal layout mode, this becomes a vertical separator.
 func Separator() {
 	C.iggSeparator()

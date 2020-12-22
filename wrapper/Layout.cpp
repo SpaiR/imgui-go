@@ -18,6 +18,11 @@ void iggPopID(void)
    ImGui::PopID();
 }
 
+int iggGetID(const char *id)
+{
+   return ImGui::GetID(id);
+}
+
 void iggSeparator(void)
 {
    ImGui::Separator();
