@@ -3,6 +3,11 @@
 #include "Viewport.h"
 #include "WrapperConverter.h"
 
+void iggSetNextWindowViewport(int viewportId)
+{
+    ImGui::SetNextWindowViewport(viewportId);
+}
+
 IggViewport iggGetWindowViewport()
 {
     return reinterpret_cast<IggViewport>(ImGui::GetWindowViewport());

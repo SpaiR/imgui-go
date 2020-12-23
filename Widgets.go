@@ -1281,3 +1281,25 @@ func SetTabItemClosed(tabOrDockedWindowLabel string) {
 	defer labelFin()
 	C.iggSetTabItemClosed(labelArg)
 }
+
+type ItemFlags int
+
+const (
+	ItemFlagsNone                     = 0
+	ItemFlagsNoTabStop                = 1 << 0 // false
+	ItemFlagsButtonRepeat             = 1 << 1 // false    // Button() will return true multiple times based on io.KeyRepeatDelay and io.KeyRepeatRate settings.
+	ItemFlagsDisabled                 = 1 << 2 // false    // [BETA] Disable interactions but doesn't affect visuals yet. See github.com/ocornut/imgui/issues/211
+	ItemFlagsNoNav                    = 1 << 3 // false
+	ItemFlagsNoNavDefaultFocus        = 1 << 4 // false
+	ItemFlagsSelectableDontClosePopup = 1 << 5 // false    // MenuItem/Selectable() automatically closes current Popup window
+	ItemFlagsMixedValue               = 1 << 6 // false    // [BETA] Represent a mixed/indeterminate value, generally multi-selection where values differ. Currently only supported by Checkbox() (later should support all sorts of widgets)
+	ItemFlagsReadOnly                 = 1 << 7 // false    // [ALPHA] Allow hovering interactions but underlying value is not changed.
+)
+
+func PushItemFlag(option ItemFlags, enabled bool) {
+	C.iggPushItemFlag(C.int(option), castBool(enabled))
+}
+
+func PopItemFlag() {
+	C.iggPopItemFlag()
+}

@@ -3,6 +3,10 @@ package imgui
 // #include "wrapper/Viewport.h"
 import "C"
 
+func SetNextWindowViewport(viewportId int) {
+	C.iggSetNextWindowViewport(C.int(viewportId))
+}
+
 type Viewport uintptr
 
 func GetWindowViewport() Viewport {

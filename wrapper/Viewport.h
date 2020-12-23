@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
+extern void iggSetNextWindowViewport(int viewportId);
+
 extern IggViewport iggGetWindowViewport(void);
 extern IggViewport iggGetMainViewport(void);
 

@@ -93,6 +93,9 @@ extern void iggEndTabItem();
 extern IggBool iggTabItemButton(char const *label, int flags);
 extern void iggSetTabItemClosed(char const *tab_or_docked_window_label);
 
+extern void iggPushItemFlag(int option, IggBool enabled);
+extern void iggPopItemFlag();
+
 #ifdef __cplusplus
 }
 #endif
