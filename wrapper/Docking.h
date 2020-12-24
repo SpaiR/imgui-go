@@ -7,6 +7,7 @@ extern "C" {
 #endif
 
 extern void iggDockSpace(int id, IggVec2 const *size, int flags);
+extern int iggDockSpaceOverViewport(IggViewport vp, int flags);
 extern void iggSetNextWindowDockID(int id, int cond);
 extern int iggGetWindowDockID();
 extern IggBool iggIsWindowDocked();

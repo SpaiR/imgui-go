@@ -38,6 +38,10 @@ func DockSpace(id int) {
 	DockSpaceV(id, Vec2{0, 0}, DockNodeFlagsNone)
 }
 
+func DockSpaceOverViewportV(viewport Viewport, flags DockNodeFlags) int {
+	return int(C.iggDockSpaceOverViewport(C.IggViewport(viewport), C.int(flags)))
+}
+
 func SetNextWindowDockIDV(id int, cond Condition) {
 	C.iggSetNextWindowDockID(C.int(id), C.int(cond))
 }

@@ -9,6 +9,12 @@ void iggDockSpace(int id, IggVec2 const *size, int flags)
     ImGui::DockSpace(id, *sizeArg, flags);
 }
 
+int iggDockSpaceOverViewport(IggViewport vp, int flags)
+{
+    ImGuiViewport *viewport = reinterpret_cast<ImGuiViewport *>(vp);  
+    return ImGui::DockSpaceOverViewport(viewport, flags);
+}
+
 void iggSetNextWindowDockID(int id, int cond)
 {
     ImGui::SetNextWindowDockID(id, cond);
