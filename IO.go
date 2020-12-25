@@ -89,8 +89,13 @@ func (io IO) MouseWheel() (float32, float32) {
 
 // SetDisplaySize sets the size in pixels.
 func (io IO) SetDisplaySize(value Vec2) {
-	out, _ := value.wrapped()
-	C.iggIoSetDisplaySize(io.handle, out)
+	valueWrapped, _ := value.wrapped()
+	C.iggIoSetDisplaySize(io.handle, valueWrapped)
+}
+
+func (io IO) SetDisplayFramebufferScale(value Vec2) {
+	valueWrapped, _ := value.wrapped()
+	C.iggIoSetDisplayFramebufferScale(io.handle, valueWrapped)
 }
 
 // Fonts returns the font atlas to load and assemble one or more fonts into a single tightly packed texture.
