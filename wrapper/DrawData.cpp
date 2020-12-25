@@ -29,3 +29,42 @@ void iggDrawDataScaleClipRects(IggDrawData handle, IggVec2 const *scale)
    Vec2Wrapper wrappedScale(scale);
    drawData->ScaleClipRects(*wrappedScale);
 }
+
+void iggDrawDataGetDisplayPos(IggDrawData handle, IggVec2 *value)
+{
+    ImDrawData *drawData = reinterpret_cast<ImDrawData *>(handle);
+    exportValue(*value, drawData->DisplayPos);
+}
+
+void iggDrawDataSetDisplayPos(IggDrawData handle, IggVec2 const *value)
+{
+   ImDrawData *drawData = reinterpret_cast<ImDrawData *>(handle);
+   Vec2Wrapper wrappedValue(value);
+   drawData->DisplayPos = *wrappedValue;
+}
+
+void iggDrawDataGetDisplaySize(IggDrawData handle, IggVec2 *value)
+{
+    ImDrawData *drawData = reinterpret_cast<ImDrawData *>(handle);
+    exportValue(*value, drawData->DisplaySize);
+}
+
+void iggDrawDataSetDisplaySize(IggDrawData handle, IggVec2 const *value)
+{
+   ImDrawData *drawData = reinterpret_cast<ImDrawData *>(handle);
+   Vec2Wrapper wrappedValue(value);
+   drawData->DisplaySize = *wrappedValue;
+}
+
+void iggDrawDataGetFramebufferScale(IggDrawData handle, IggVec2 *value)
+{
+    ImDrawData *drawData = reinterpret_cast<ImDrawData *>(handle);
+    exportValue(*value, drawData->FramebufferScale);
+}
+
+void iggDrawDataSetFramebufferScale(IggDrawData handle, IggVec2 const *value)
+{
+   ImDrawData *drawData = reinterpret_cast<ImDrawData *>(handle);
+   Vec2Wrapper wrappedValue(value);
+   drawData->FramebufferScale = *wrappedValue;
+}

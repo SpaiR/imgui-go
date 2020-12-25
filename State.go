@@ -238,7 +238,8 @@ const (
 	MouseCursorResizeNWSE = 6
 	// MouseCursorHand (Unused by imgui functions. Use for e.g. hyperlinks)
 	MouseCursorHand  = 7
-	MouseCursorCount = 8
+	MouseCursorNotAllowed = 8
+	MouseCursorCount = 9
 )
 
 // MouseCursor returns desired cursor type, reset in imgui.NewFrame(), this is updated during the frame.

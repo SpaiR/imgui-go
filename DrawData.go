@@ -46,3 +46,42 @@ func (data DrawData) ScaleClipRects(scale Vec2) {
 	scaleArg, _ := scale.wrapped()
 	C.iggDrawDataScaleClipRects(data.handle(), scaleArg)
 }
+
+func (data DrawData) GetDisplayPos() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggDrawDataGetDisplayPos(data.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+func (data DrawData) SetDisplayPos(value Vec2) {
+	valueArg, _ := value.wrapped()
+	C.iggDrawDataSetDisplayPos(data.handle(), valueArg)
+}
+
+func (data DrawData) GetDisplaySize() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggDrawDataGetDisplaySize(data.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+func (data DrawData) SetDisplaySize(value Vec2) {
+	valueArg, _ := value.wrapped()
+	C.iggDrawDataSetDisplaySize(data.handle(), valueArg)
+}
+
+func (data DrawData) GetFramebufferScale() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggDrawDataGetFramebufferScale(data.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+func (data DrawData) SetFramebufferScale(value Vec2) {
+	valueArg, _ := value.wrapped()
+	C.iggDrawDataSetFramebufferScale(data.handle(), valueArg)
+}
