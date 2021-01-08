@@ -40,3 +40,27 @@ func (viewport Viewport) GetSize() Vec2 {
 	valueFin()
 	return value
 }
+
+func (viewport Viewport) GetCenter() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggViewportGetCenter(viewport.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+func (viewport Viewport) GetWorkPos() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggViewportGetWorkPos(viewport.handle(), valueArg)
+	valueFin()
+	return value
+}
+
+func (viewport Viewport) GetWorkSize() Vec2 {
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggViewportGetWorkSize(viewport.handle(), valueArg)
+	valueFin()
+	return value
+}

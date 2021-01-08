@@ -35,3 +35,21 @@ void iggViewportGetSize(IggViewport handle, IggVec2 *value)
     ImGuiViewport *viewport = reinterpret_cast<ImGuiViewport *>(handle);
     exportValue(*value, viewport->Size);
 }
+
+void iggViewportGetCenter(IggViewport handle, IggVec2 *value)
+{
+    ImGuiViewport *viewport = reinterpret_cast<ImGuiViewport *>(handle);
+    exportValue(*value, viewport->GetCenter());
+}
+
+void iggViewportGetWorkPos(IggViewport handle, IggVec2 *value)
+{
+    ImGuiViewport *viewport = reinterpret_cast<ImGuiViewport *>(handle);
+    exportValue(*value, viewport->GetWorkPos());
+}
+
+void iggViewportGetWorkSize(IggViewport handle, IggVec2 *value)
+{
+    ImGuiViewport *viewport = reinterpret_cast<ImGuiViewport *>(handle);
+    exportValue(*value, viewport->GetWorkSize());
+}
