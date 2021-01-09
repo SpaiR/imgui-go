@@ -108,3 +108,25 @@ func DockBuilderSplitNode(nodeId int, splitDir Dir, sizeRatioForNodeAtDir float3
 func DockBuilderFinish(nodeId int) {
 	C.iggDockBuilderFinish(C.int(nodeId))
 }
+
+type DockNode uintptr
+
+func DockBuilderGetNode(nodeId int) DockNode {
+	return DockNode(C.iggDockBuilderGetNode(C.int(nodeId)))
+}
+
+func DockBuilderGetCentralNode(nodeId int) DockNode {
+	return DockNode(C.iggDockBuilderGetCentralNode(C.int(nodeId)))
+}
+
+func (dockNode DockNode) handle() C.IggDockNode {
+	return C.IggDockNode(dockNode)
+}
+
+func (dockNode DockNode) SetSharedFlags(flags int) {
+	C.iggSetSharedFlags(dockNode.handle(), C.int(flags))
+}
+
+func (dockNode DockNode) SetLocalFlags(flags int) {
+	C.iggSetLocalFlags(dockNode.handle(), C.int(flags))
+}

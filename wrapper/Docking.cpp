@@ -66,3 +66,25 @@ void iggDockBuilderFinish(int nodeId)
 {
     ImGui::DockBuilderFinish(nodeId);
 }
+
+IggDockNode iggDockBuilderGetNode(int nodeId)
+{
+    return reinterpret_cast<IggDockNode>(ImGui::DockBuilderGetNode(nodeId));
+}
+
+IggDockNode iggDockBuilderGetCentralNode(int nodeId)
+{
+    return reinterpret_cast<IggDockNode>(ImGui::DockBuilderGetCentralNode(nodeId));
+}
+
+void iggSetSharedFlags(IggDockNode dn, int flags)
+{
+    ImGuiDockNode *dockNode = reinterpret_cast<ImGuiDockNode *>(dn);
+    dockNode->SharedFlags = flags;
+}
+
+void iggSetLocalFlags(IggDockNode dn, int flags)
+{
+    ImGuiDockNode *dockNode = reinterpret_cast<ImGuiDockNode *>(dn);
+    dockNode->LocalFlags = flags;
+}

@@ -19,6 +19,11 @@ extern void iggDockBuilderSetNodeSize(int nodeId, IggVec2 const *size);
 extern int iggDockBuilderSplitNode(int nodeId, int splitDir, float sizeRatioForNodeAtDir, int *outIdAtDir, int *outIdAtOppositeDir);
 extern void iggDockBuilderFinish(int nodeId);
 
+extern IggDockNode iggDockBuilderGetNode(int nodeId);
+extern IggDockNode iggDockBuilderGetCentralNode(int nodeId);
+extern void iggSetSharedFlags(IggDockNode dn, int flags);
+extern void iggSetLocalFlags(IggDockNode dn, int flags);
+
 #ifdef __cplusplus
 }
 #endif
