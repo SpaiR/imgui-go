@@ -34,6 +34,7 @@ extern void iggSetNextWindowBgAlpha(float value);
 
 extern void iggPushItemWidth(float width);
 extern void iggPopItemWidth(void);
+extern void iggSetNextItemWidth(float width);
 extern float iggCalcItemWidth(void);
 extern void iggPushTextWrapPos(float wrapPosX);
 extern void iggPopTextWrapPos(void);

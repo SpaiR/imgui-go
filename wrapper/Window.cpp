@@ -136,6 +136,11 @@ void iggPopItemWidth(void)
    ImGui::PopItemWidth();
 }
 
+void iggSetNextItemWidth(float width)
+{
+    ImGui::SetNextItemWidth(width);
+}
+
 float iggCalcItemWidth(void)
 {
    return ImGui::CalcItemWidth();

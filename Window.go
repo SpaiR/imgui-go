@@ -265,6 +265,10 @@ func PopItemWidth() {
 	C.iggPopItemWidth()
 }
 
+func SetNextItemWidth(width float32) {
+	C.iggSetNextItemWidth(C.float(width))
+}
+
 // CalcItemWidth returns the width of items given pushed settings and current cursor position.
 func CalcItemWidth() float32 {
 	return float32(C.iggCalcItemWidth())
