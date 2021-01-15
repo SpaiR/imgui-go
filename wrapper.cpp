@@ -35,6 +35,7 @@
 #include "wrapper/WrapperConverter.cpp"
 #include "wrapper/Docking.cpp"
 #include "wrapper/Viewport.cpp"
+#include "wrapper/Storage.cpp"
 #ifdef IMGUI_FREETYPE_ENABLED
 #include "wrapper/FreeType.cpp"
 #endif

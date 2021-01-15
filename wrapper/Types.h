@@ -24,6 +24,7 @@ typedef unsigned int IggPackedColor;
 typedef void *IggPayload;
 typedef void *IggViewport;
 typedef void *IggDockNode;
+typedef void *IggStorage;
 
 typedef struct tagIggVec2
 {
