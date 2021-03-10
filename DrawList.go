@@ -3,6 +3,7 @@ package imgui
 // #include "wrapper/DrawList.h"
 import "C"
 import (
+	"image/color"
 	"unsafe"
 )
 
@@ -10,14 +11,14 @@ import (
 // This is the low-level list of polygons that ImGui functions are filling.
 // At the end of the frame, all command lists are passed to your render function for rendering.
 //
-// Each ImGui window contains its own DrawList. You can use GetWindowDrawList() to access
+// Each ImGui window contains its own DrawList. You can use WindowDrawList() to access
 // the current window draw list and draw custom primitives.
 //
 // You can interleave normal ImGui calls and adding primitives to the current draw list.
 //
-// All positions are generally in pixel coordinates (top-left at (0,0), bottom-right at io.DisplaySize),
-// however you are totally free to apply whatever transformation matrix to want to the data
-// (if you apply such transformation you'll want to apply it to ClipRect as well)
+// In single viewport mode, top-left is == MainViewport().Pos() (generally 0,0), bottom-right is == MainViewport().Pos()+Size (generally io.DisplaySize).
+// You are totally free to apply whatever transformation matrix to want to the data
+// (depending on the use of the transformation you may want to apply it to ClipRect as well!)
 //
 // Important: Primitives are always added to the list and not culled (culling is done at
 // higher-level by ImGui functions), if you use this API a lot consider coarse culling your drawn objects.
@@ -91,18 +92,35 @@ func WindowDrawList() DrawList {
 	return DrawList(C.iggGetWindowDrawList())
 }
 
-// This is a list of DrawCornerFlags.
+// BackgroundDrawList returns the DrawList for the background behind all windows.
+func BackgroundDrawList() DrawList {
+	return DrawList(C.iggGetBackgroundDrawList())
+}
+
+// DrawCornerFlags for DrawList.DrawRect(), etc.
+type DrawCornerFlags int
+
 const (
-	DrawCornerFlagsNone     = 0x0
-	DrawCornerFlagsTopLeft  = 0x1
-	DrawCornerFlagsTopRight = 0x2
-	DrawCornerFlagsBotLeft  = 0x4
-	DrawCornerFlagsBotRight = 0x8
-	DrawCornerFlagsTop      = DrawCornerFlagsTopLeft | DrawCornerFlagsTopRight
-	DrawCornerFlagsBot      = DrawCornerFlagsBotLeft | DrawCornerFlagsBotRight
-	DrawCornerFlagsLeft     = DrawCornerFlagsTopLeft | DrawCornerFlagsBotLeft
-	DrawCornerFlagsRight    = DrawCornerFlagsTopRight | DrawCornerFlagsBotRight
-	DrawCornerFlagsAll      = 0xF
+	// DrawCornerFlagsNone specifies the default behaviour.
+	DrawCornerFlagsNone DrawCornerFlags = 0
+	// DrawCornerFlagsTopLeft draw corner in the top left.
+	DrawCornerFlagsTopLeft DrawCornerFlags = 1 << 0
+	// DrawCornerFlagsTopRight draw corner in the top right.
+	DrawCornerFlagsTopRight DrawCornerFlags = 1 << 1
+	// DrawCornerFlagsBotLeft draw corner in the bottom left.
+	DrawCornerFlagsBotLeft DrawCornerFlags = 1 << 2
+	// DrawCornerFlagsBotRight draw corner in the bottom right.
+	DrawCornerFlagsBotRight DrawCornerFlags = 1 << 3
+	// DrawCornerFlagsTop draw corners at the top of the area.
+	DrawCornerFlagsTop DrawCornerFlags = DrawCornerFlagsTopLeft | DrawCornerFlagsTopRight
+	// DrawCornerFlagsBot draw corners at the bottom of the area.
+	DrawCornerFlagsBot DrawCornerFlags = DrawCornerFlagsBotLeft | DrawCornerFlagsBotRight
+	// DrawCornerFlagsLeft draw corners on the left of the area.
+	DrawCornerFlagsLeft DrawCornerFlags = DrawCornerFlagsTopLeft | DrawCornerFlagsBotLeft
+	// DrawCornerFlagsRight draw corners on the rigth of the area.
+	DrawCornerFlagsRight DrawCornerFlags = DrawCornerFlagsTopRight | DrawCornerFlagsBotRight
+	// DrawCornerFlagsAll draws all corners.
+	DrawCornerFlagsAll DrawCornerFlags = 0xF
 )
 
 // AddLine call AddLineV with a thickness value of 1.0.
@@ -127,10 +145,10 @@ func (list DrawList) AddRect(min Vec2, max Vec2, col PackedColor) {
 // 1 pixel are not rendered properly.
 //
 // drawCornerFlags indicate which corners of the rectangle are to be rounded.
-func (list DrawList) AddRectV(min Vec2, max Vec2, col PackedColor, rounding float32, drawCornerFlags int, thickness float32) {
+func (list DrawList) AddRectV(min Vec2, max Vec2, col PackedColor, rounding float32, flags DrawCornerFlags, thickness float32) {
 	minArg, _ := min.wrapped()
 	maxArg, _ := max.wrapped()
-	C.iggAddRect(list.handle(), minArg, maxArg, C.IggPackedColor(col), C.float(rounding), C.int(drawCornerFlags), C.float(thickness))
+	C.iggAddRect(list.handle(), minArg, maxArg, C.IggPackedColor(col), C.float(rounding), C.int(flags), C.float(thickness))
 }
 
 // AddRectFilled calls AddRectFilledV(min, max, col, 1.0, DrawCornerFlagsAll).
@@ -141,10 +159,10 @@ func (list DrawList) AddRectFilled(min Vec2, max Vec2, col PackedColor) {
 // AddRectFilledV adds a filled rectangle to the draw list. min is the
 // upper-left corner of the rectangle, and max is the lower right corner.
 // rectangles with dimensions of 1 pixel are not rendered properly.
-func (list DrawList) AddRectFilledV(min Vec2, max Vec2, col PackedColor, rounding float32, drawCornerFlags int) {
+func (list DrawList) AddRectFilledV(min Vec2, max Vec2, col PackedColor, rounding float32, flags DrawCornerFlags) {
 	minArg, _ := min.wrapped()
 	maxArg, _ := max.wrapped()
-	C.iggAddRectFilled(list.handle(), minArg, maxArg, C.IggPackedColor(col), C.float(rounding), C.int(drawCornerFlags))
+	C.iggAddRectFilled(list.handle(), minArg, maxArg, C.IggPackedColor(col), C.float(rounding), C.int(flags))
 }
 
 // AddCircleFilled calls AddCircleFilledV(center, radius, col, 0).
@@ -190,4 +208,26 @@ func (list DrawList) AddTriangleFilled(p1 Vec2, p2 Vec2, p3 Vec2, col PackedColo
 	p2Arg, _ := p2.wrapped()
 	p3Arg, _ := p3.wrapped()
 	C.iggAddTriangleFilled(list.handle(), p1Arg, p2Arg, p3Arg, C.IggPackedColor(col))
+}
+
+// AddText adds a text in specified color at given position pos.
+func (list DrawList) AddText(pos Vec2, col PackedColor, text string) {
+	CString := newStringBuffer(text)
+	defer CString.free()
+	posArg, _ := pos.wrapped()
+	C.iggAddText(list.handle(), posArg, C.IggPackedColor(col), (*C.char)(CString.ptr), C.int(CString.size)-1)
+}
+
+// AddImage calls AddImageV(textureId, posMin, posMax, Vec2{0,0}, Vec2{1,1}, Packed(color.White)).
+func (list DrawList) AddImage(textureID TextureID, posMin Vec2, posMax Vec2) {
+	list.AddImageV(textureID, posMin, posMax, Vec2{X: 0, Y: 0}, Vec2{X: 1, Y: 1}, Packed(color.White))
+}
+
+// AddImageV adds an image based on given texture ID.
+func (list DrawList) AddImageV(textureID TextureID, posMin Vec2, posMax Vec2, uvMin Vec2, uvMax Vec2, tintCol PackedColor) {
+	posMinArg, _ := posMin.wrapped()
+	posMaxArg, _ := posMax.wrapped()
+	uvMinArg, _ := uvMin.wrapped()
+	uvMaxArg, _ := uvMax.wrapped()
+	C.iggAddImage(list.handle(), C.IggTextureID(textureID), posMinArg, posMaxArg, uvMinArg, uvMaxArg, C.IggPackedColor(tintCol))
 }
