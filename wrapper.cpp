@@ -34,3 +34,8 @@
 #include "wrapper/Widgets.cpp"
 #include "wrapper/Window.cpp"
 #include "wrapper/WrapperConverter.cpp"
+
+
+// extension
+#include "wrapper/Docking.cpp"
+#include "wrapper/Storage.cpp"

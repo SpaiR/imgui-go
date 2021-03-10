@@ -103,11 +103,6 @@ func (io IO) SetDisplaySize(value Vec2) {
 	C.iggIoSetDisplaySize(io.handle, valueWrapped)
 }
 
-func (io IO) SetDisplayFramebufferScale(value Vec2) {
-	valueWrapped, _ := value.wrapped()
-	C.iggIoSetDisplayFramebufferScale(io.handle, valueWrapped)
-}
-
 // SetDisplayFrameBufferScale sets the frame buffer scale factor.
 func (io IO) SetDisplayFrameBufferScale(value Vec2) {
 	out, _ := value.wrapped()
