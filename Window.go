@@ -454,3 +454,12 @@ func (viewport Viewport) WorkCenter() Vec2 {
 	valueFin()
 	return value
 }
+
+func CalcItemSize(size Vec2, defaultW float32, defaultH float32) Vec2 {
+	sizeArg, _ := size.wrapped()
+	var value Vec2
+	valueArg, valueFin := value.wrapped()
+	C.iggCalcItemSize(sizeArg, C.float(defaultW), C.float(defaultH), valueArg)
+	valueFin()
+	return value
+}

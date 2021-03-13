@@ -222,3 +222,9 @@ void iggViewportGetWorkCenter(IggViewport handle, IggVec2 *out)
    ImGuiViewport *viewport = reinterpret_cast<ImGuiViewport *>(handle);
    exportValue(*out, viewport->GetWorkCenter());
 }
+
+void iggCalcItemSize(const IggVec2 *size, float defaultW, float defaultH, IggVec2 *out)
+{
+    Vec2Wrapper sizeArg(size);
+    exportValue(*out, ImGui::CalcItemSize(*sizeArg, defaultW, defaultH));
+}

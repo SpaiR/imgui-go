@@ -52,6 +52,8 @@ extern void iggViewportGetWorkSize(IggViewport handle, IggVec2 *out);
 extern void iggViewportGetCenter(IggViewport handle, IggVec2 *out);
 extern void iggViewportGetWorkCenter(IggViewport handle, IggVec2 *out);
 
+extern void iggCalcItemSize(const IggVec2 *size, float defaultW, float defaultH, IggVec2 *out);
+
 #ifdef __cplusplus
 }
 #endif
