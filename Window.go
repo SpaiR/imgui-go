@@ -463,3 +463,28 @@ func CalcItemSize(size Vec2, defaultW float32, defaultH float32) Vec2 {
 	valueFin()
 	return value
 }
+
+type Axis int
+
+const (
+	AxisNone Axis = -1
+	AxisX Axis = 0
+	AxisY Axis = 1
+)
+
+func SplitterBehavior(bbMin Vec2, bbMax Vec2, id int, axis Axis, size1 *float32, size2 *float32, minSize1 float32, minSize2 float32) bool {
+	return SplitterBehaviorV(bbMin, bbMax, id, axis, size1, size2, minSize1, minSize2, 0, 0)
+}
+
+
+func SplitterBehaviorV(bbMin Vec2, bbMax Vec2, id int, axis Axis, size1 *float32, size2 *float32, minSize1 float32, minSize2 float32, hoverExtend float32, hoverVisibilityDelay float32) bool {
+	bbMinArg, _ := bbMin.wrapped()
+	bbMaxArg, _ := bbMax.wrapped()
+
+	size1Arg, size1Fin := wrapFloat(size1)
+	defer size1Fin()
+	size2Arg, size2Fin := wrapFloat(size2)
+	defer size2Fin()
+
+	return C.iggSplitterBehavior(bbMinArg, bbMaxArg, C.int(id), C.int(axis), size1Arg, size2Arg, C.float(minSize1), C.float(minSize2), C.float(hoverExtend), C.float(hoverVisibilityDelay)) != 0
+}

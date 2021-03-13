@@ -53,6 +53,7 @@ extern void iggViewportGetCenter(IggViewport handle, IggVec2 *out);
 extern void iggViewportGetWorkCenter(IggViewport handle, IggVec2 *out);
 
 extern void iggCalcItemSize(const IggVec2 *size, float defaultW, float defaultH, IggVec2 *out);
+extern IggBool iggSplitterBehavior(const IggVec2 *bbMin, const IggVec2 *bbMax, int id, int axis, float *size1, float *size2, float minSize1, float minSize2, float hoverExtend, float hoverVisibilityDelay);
 
 #ifdef __cplusplus
 }

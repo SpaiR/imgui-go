@@ -228,3 +228,11 @@ void iggCalcItemSize(const IggVec2 *size, float defaultW, float defaultH, IggVec
     Vec2Wrapper sizeArg(size);
     exportValue(*out, ImGui::CalcItemSize(*sizeArg, defaultW, defaultH));
 }
+
+IggBool iggSplitterBehavior(const IggVec2 *bbMin, const IggVec2 *bbMax, int id, int axis, float *size1, float *size2, float minSize1, float minSize2, float hoverExtend, float hoverVisibilityDelay)
+{
+    Vec2Wrapper bbMinArg(bbMin);
+    Vec2Wrapper bbMaxArg(bbMax);
+    const ImRect bb = ImRect(*bbMinArg, *bbMaxArg);
+    return ImGui::SplitterBehavior(bb, (ImGuiID)id, (ImGuiAxis)axis, size1, size2, minSize1, minSize2, hoverExtend, hoverVisibilityDelay) ? 1 : 0;
+}
