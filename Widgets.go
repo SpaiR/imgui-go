@@ -33,7 +33,7 @@ func TextWrapped(text string) {
 	C.iggTextWrapped(textArg)
 }
 
-func TextBulletText(text string) {
+func BulletText(text string) {
 	textArg, textFin := wrapString(text)
 	defer textFin()
 	C.iggBulletText(textArg)
