@@ -13,6 +13,27 @@ void iggLabelText(char const *label, char const *text)
    ImGui::LabelText(label, "%s", text);
 }
 
+void iggTextColored(IggVec4 const *col, const char *text)
+{
+    Vec4Wrapper colArg(col);
+    ImGui::TextColored(*colArg, text);
+}
+
+void iggTextDisabled(char const *text)
+{
+   ImGui::TextDisabled(text);
+}
+
+void iggTextWrapped(char const *text)
+{
+   ImGui::TextWrapped(text);
+}
+
+void iggBulletText(char const *text)
+{
+   ImGui::BulletText(text);
+}
+
 IggBool iggButton(char const *label, IggVec2 const *size)
 {
    Vec2Wrapper sizeArg(size);

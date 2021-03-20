@@ -8,6 +8,10 @@ extern "C" {
 
 extern void iggTextUnformatted(char const *text);
 extern void iggLabelText(char const *label, char const *text);
+extern void iggTextColored(IggVec4 const *col, const char *text);
+extern void iggTextDisabled(const char *text);
+extern void iggTextWrapped(const char *text);
+extern void iggBulletText(const char *text);
 
 extern IggBool iggButton(char const *label, IggVec2 const *size);
 extern IggBool iggSmallButton(const char *label);

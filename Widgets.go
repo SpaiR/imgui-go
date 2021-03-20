@@ -14,6 +14,31 @@ func Text(text string) {
 	C.iggTextUnformatted(textArg)
 }
 
+func TextColored(col Vec4, text string) {
+	textArg, textFin := wrapString(text)
+	defer textFin()
+	colArg, _ := col.wrapped()
+	C.iggTextColored(colArg, textArg)
+}
+
+func TextDisabled(text string) {
+	textArg, textFin := wrapString(text)
+	defer textFin()
+	C.iggTextDisabled(textArg)
+}
+
+func TextWrapped(text string) {
+	textArg, textFin := wrapString(text)
+	defer textFin()
+	C.iggTextWrapped(textArg)
+}
+
+func TextBulletText(text string) {
+	textArg, textFin := wrapString(text)
+	defer textFin()
+	C.iggBulletText(textArg)
+}
+
 // LabelText adds text+label aligned the same way as value+label widgets.
 func LabelText(label, text string) {
 	labelArg, labelFin := wrapString(label)
