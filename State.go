@@ -184,8 +184,17 @@ func IsKeyReleased(key int) bool {
 	return C.iggIsKeyReleased(C.int(key)) != 0
 }
 
+type MouseButton int
+
+const (
+	MouseButtonLeft   MouseButton = 0
+	MouseButtonRight  MouseButton = 1
+	MouseButtonMiddle MouseButton = 2
+	MouseButtonCount  MouseButton = 5
+)
+
 // IsMouseDown returns true if the corresponding mouse button is currently being held down.
-func IsMouseDown(button int) bool {
+func IsMouseDown(button MouseButton) bool {
 	return C.iggIsMouseDown(C.int(button)) != 0
 }
 
@@ -196,27 +205,27 @@ func IsAnyMouseDown() bool {
 
 // IsMouseClickedV returns true if the mouse button was clicked (0=left, 1=right, 2=middle)
 // If repeat=true and the mouse button is being held down then the click is repeated using io.KeyRepeatDelay and KeyRepeatRate.
-func IsMouseClickedV(button int, repeat bool) bool {
+func IsMouseClickedV(button MouseButton, repeat bool) bool {
 	return C.iggIsMouseClicked(C.int(button), castBool(repeat)) != 0
 }
 
 // IsMouseClicked calls IsMouseClickedV(key, false).
-func IsMouseClicked(button int) bool {
+func IsMouseClicked(button MouseButton) bool {
 	return IsMouseClickedV(button, false)
 }
 
 // IsMouseReleased returns true if the mouse button was released (went from Down to !Down).
-func IsMouseReleased(button int) bool {
+func IsMouseReleased(button MouseButton) bool {
 	return C.iggIsMouseReleased(C.int(button)) != 0
 }
 
 // IsMouseDoubleClicked returns true if the mouse button was double-clicked (0=left, 1=right, 2=middle).
-func IsMouseDoubleClicked(button int) bool {
+func IsMouseDoubleClicked(button MouseButton) bool {
 	return C.iggIsMouseDoubleClicked(C.int(button)) != 0
 }
 
 // IsMouseDragging returns true if the mouse button is being dragged.
-func IsMouseDragging(button int, threshold float64) bool {
+func IsMouseDragging(button MouseButton, threshold float64) bool {
 	return C.iggIsMouseDragging(C.int(button), C.float(threshold)) != 0
 }
 
