@@ -62,6 +62,18 @@ float iggStyleGetWindowBorderSize(IggGuiStyle handle)
     return style->WindowBorderSize;
 }
 
+void iggStyleSetChildBorderSize(IggGuiStyle handle, float value)
+{
+    ImGuiStyle *style = reinterpret_cast<ImGuiStyle *>(handle);
+    style->ChildBorderSize = value;
+}
+
+float iggStyleGetChildBorderSize(IggGuiStyle handle)
+{
+    ImGuiStyle *style = reinterpret_cast<ImGuiStyle *>(handle);
+    return style->ChildBorderSize;
+}
+
 void iggStyleGetItemInnerSpacing(IggGuiStyle handle, IggVec2 *value)
 {
    ImGuiStyle *style = reinterpret_cast<ImGuiStyle *>(handle);

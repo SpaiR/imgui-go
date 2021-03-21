@@ -20,6 +20,8 @@ extern void iggPopStyleVar(int count);
 
 extern void iggStyleSetWindowBorderSize(IggGuiStyle handle, float value);
 extern float iggStyleGetWindowBorderSize(IggGuiStyle handle);
+extern void iggStyleSetChildBorderSize(IggGuiStyle handle, float value);
+extern float iggStyleGetChildBorderSize(IggGuiStyle handle);
 
 extern void iggStyleGetItemInnerSpacing(IggGuiStyle handle, IggVec2 *value);
 extern void iggStyleGetItemSpacing(IggGuiStyle handle, IggVec2 *value);

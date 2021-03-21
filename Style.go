@@ -190,6 +190,14 @@ func (style Style) WindowBorderSize() float32 {
 	return float32(C.iggStyleGetWindowBorderSize(style.handle()))
 }
 
+func (style Style) SetChildBorderSize(value float32) {
+	C.iggStyleSetChildBorderSize(style.handle(), C.float(value))
+}
+
+func (style Style) ChildBorderSize() float32 {
+	return float32(C.iggStyleGetChildBorderSize(style.handle()))
+}
+
 // ItemInnerSpacing is the horizontal and vertical spacing between elements of
 // a composed widget (e.g. a slider and its label).
 func (style Style) ItemInnerSpacing() Vec2 {
