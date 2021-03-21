@@ -182,6 +182,14 @@ func (style Style) handle() C.IggGuiStyle {
 	return C.IggGuiStyle(style)
 }
 
+func (style Style) SetWindowBorderSize(value float32) {
+	C.iggStyleSetWindowBorderSize(style.handle(), C.float(value))
+}
+
+func (style Style) WindowBorderSize() float32 {
+	return float32(C.iggStyleGetWindowBorderSize(style.handle()))
+}
+
 // ItemInnerSpacing is the horizontal and vertical spacing between elements of
 // a composed widget (e.g. a slider and its label).
 func (style Style) ItemInnerSpacing() Vec2 {

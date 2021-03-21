@@ -18,6 +18,9 @@ extern void iggPushStyleVarFloat(int index, float value);
 extern void iggPushStyleVarVec2(int index, IggVec2 const *value);
 extern void iggPopStyleVar(int count);
 
+extern void iggStyleSetWindowBorderSize(IggGuiStyle handle, float value);
+extern float iggStyleGetWindowBorderSize(IggGuiStyle handle);
+
 extern void iggStyleGetItemInnerSpacing(IggGuiStyle handle, IggVec2 *value);
 extern void iggStyleGetItemSpacing(IggGuiStyle handle, IggVec2 *value);
 

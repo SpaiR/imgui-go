@@ -50,6 +50,18 @@ void iggPopStyleVar(int count)
    ImGui::PopStyleVar(count);
 }
 
+void iggStyleSetWindowBorderSize(IggGuiStyle handle, float value)
+{
+    ImGuiStyle *style = reinterpret_cast<ImGuiStyle *>(handle);
+    style->WindowBorderSize = value;
+}
+
+float iggStyleGetWindowBorderSize(IggGuiStyle handle)
+{
+    ImGuiStyle *style = reinterpret_cast<ImGuiStyle *>(handle);
+    return style->WindowBorderSize;
+}
+
 void iggStyleGetItemInnerSpacing(IggGuiStyle handle, IggVec2 *value)
 {
    ImGuiStyle *style = reinterpret_cast<ImGuiStyle *>(handle);
