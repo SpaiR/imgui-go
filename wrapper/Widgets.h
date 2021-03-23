@@ -100,6 +100,9 @@ extern void iggEndTabItem();
 extern IggBool iggTabItemButton(char const *label, int flags);
 extern void iggSetTabItemClosed(char const *tab_or_docked_window_label);
 
+extern void iggPushClipRect(IggVec2 const *clipRectMin, IggVec2 const *clipRectMax, IggBool intersectWithCurrentClipRect);
+extern void iggPopClipRect();
+
 #ifdef __cplusplus
 }
 #endif

@@ -1386,3 +1386,13 @@ func SetTabItemClosed(tabOrDockedWindowLabel string) {
 	defer labelFin()
 	C.iggSetTabItemClosed(labelArg)
 }
+
+func PushClipRec(clipRectMin, clipRectMax Vec2, intersectWithCurrentClipRect bool) {
+	clipRectMinArg, _ := clipRectMin.wrapped()
+	clipRectMaxArg, _ := clipRectMax.wrapped()
+	C.iggPushClipRect(clipRectMinArg, clipRectMaxArg, castBool(intersectWithCurrentClipRect))
+}
+
+func PopClipRect() {
+	C.iggPopClipRect()
+}

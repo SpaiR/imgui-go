@@ -398,3 +398,15 @@ void iggSetTabItemClosed(char const *tab_or_docked_window_label)
 {
    ImGui::SetTabItemClosed(tab_or_docked_window_label);
 }
+
+void iggPushClipRect(IggVec2 const *clipRectMin, IggVec2 const *clipRectMax, IggBool intersectWithCurrentClipRect)
+{
+    Vec2Wrapper clipRectMinArg(clipRectMin);
+    Vec2Wrapper clipRectMaxArg(clipRectMax);
+    ImGui::PushClipRect(*clipRectMinArg, *clipRectMaxArg, intersectWithCurrentClipRect != 0);
+}
+
+void iggPopClipRect()
+{
+    ImGui::PopClipRect();
+}
